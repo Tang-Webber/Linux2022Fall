@@ -17,7 +17,7 @@ cd ..
 cat filename student_id | while read line
 do
     path=`find /home/webbertang/Linux_Week5_Lab/compressed_files -name "*$line*"`
-    extension=$(echo $path | cut -c 1-60 --complement)
+    extension=$(echo $path | cut -d"." -f 2)
     if [ -z $path ]
     then
         echo $line >> missing_list
@@ -30,7 +30,7 @@ do
             cd compressed_files
             unrar x $line.rar /home/webbertang/Linux_Week5_Lab/compressed_files/rar
             cd ..
-        elif [ "$extension" = "tar.gz" ]; then
+        elif [ "$extension" = "tar" ]; then
             cd compressed_files
             tar -zxvf $line.tar.gz -C /home/webbertang/Linux_Week5_Lab/compressed_files/tar.gz
             cd ..
